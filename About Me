@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Fernando Cortez Jr — Search</title>
+  <meta name="description" content="Learn about Fernando Cortez Jr — bio, skills, projects, education, and contact info. Search to find what you need fast." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="About Fernando Cortez Jr — Search" />
+  <meta property="og:description" content="A simple searchable About Me page for Fernando Cortez Jr." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fernando Cortez Jr",
+    "url": "https://YOUR-USERNAME.github.io/",
+    "jobTitle": "Any Position",
+    "sameAs": [
+      "https://www.facebook.com/",
+      "https://www.instagram.com/",
+      "https://t.me/"
+    ]
+  }
+  </script>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height: 1.5; margin: 24px; }
+    header { margin-bottom: 1rem; }
+    input[type="search"] { width: 100%; max-width: 720px; padding: .75rem 1rem; font-size: 1rem; border: 1px solid #bbb; border-radius: 8px; }
+    .meta { color: #555; font-size: .95rem; margin: .5rem 0 1rem; }
+    .count { font-weight: 600; margin: .25rem 0 1rem; }
+    .item { border: 1px solid #ddd; border-radius: 12px; padding: 1rem; margin: .75rem 0; }
+    .item h2 { margin: 0 0 .25rem; font-size: 1.1rem; }
+    .muted { color: #666; font-size: .9rem; }
+    footer { margin-top: 2rem; font-size: .9rem; color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fernando Cortez Jr</h1>
+    <p class="muted">Hi loveyy I just wanna say ILOVEYOU!</p>
+  </header>
+
+  <label for="searchBox"><strong>Search about me:</strong></label>
+  <input id="searchBox" type="search" placeholder="Try: about, skills, projects, contact" autofocus />
+  <div class="meta">This page is fully client‑side: your search happens in your browser.</div>
+  <div id="count" class="count"></div>
+
+  <noscript>
+    <p><strong>Note:</strong> Turn on JavaScript to enable search. All sections are shown below.</p>
+  </noscript>
+
+  <article class="item" data-title="About" data-keywords="bio, introduction, deep voice, always">
+    <h2>About</h2>
+    <p>Deep Voice, always H*rny HAHAH</p>
+  </article>
+
+  <article class="item" data-title="Skills" data-keywords="any position, work">
+    <h2>Skills</h2>
+    <p>Any Position will do</p>
+  </article>
+
+  <article class="item" data-title="Projects" data-keywords="private, message">
+    <h2>Projects</h2>
+    <p>This is what you call PRIVATE MESSAGE</p>
+  </article>
+
+  <article class="item" data-title="Education" data-keywords="none">
+    <h2>Education</h2>
+    <p>None</p>
+  </article>
+
+  <article class="item" data-title="Contact" data-keywords="instagram, facebook, telegram, message">
+    <h2>Contact</h2>
+    <p>Message me on IG, Fb, or Telegram</p>
+  </article>
+
+  <footer>
+    <p>© <span id="year"></span> Fernando Cortez Jr • Last updated: <time id="updated"></time></p>
+  </footer>
+
+  <script>
+    const items = Array.from(document.querySelectorAll('.item')).map((el) => ({
+      el,
+      title: (el.dataset.title || '').toLowerCase(),
+      keywords: (el.dataset.keywords || '').toLowerCase(),
+      text: (el.textContent || '').toLowerCase().replace(/\s+/g, ' ')
+    }));
+
+    const searchBox = document.getElementById('searchBox');
+    const count = document.getElementById('count');
+
+    function runSearch(q) {
+      q = (q || '').trim().toLowerCase();
+      if (!q) {
+        let visible = 0;
+        items.forEach((it) => { it.el.style.display = ''; visible++; });
+        count.textContent = `${visible} section${visible === 1 ? '' : 's'} shown.`;
+        return;
+      }
+      const words = q.split(/\s+/);
+      let matches = 0;
+      items.forEach((it) => {
+        const hay = `${it.title} ${it.keywords} ${it.text}`;
+        const ok = words.every((w) => hay.includes(w));
+        it.el.style.display = ok ? '' : 'none';
+        if (ok) matches++;
+      });
+      count.textContent = `${matches} result${matches === 1 ? '' : 's'} for "${q}"`;
+    }
+
+    searchBox.addEventListener('input', (e) => runSearch(e.target.value));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('updated').textContent = new Date().toISOString().slice(0, 10);
+
+    runSearch('');
+  </script>
+</body>
+</html>
